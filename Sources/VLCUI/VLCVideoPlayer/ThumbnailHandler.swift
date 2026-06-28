@@ -1,3 +1,11 @@
+//
+// Swiftfin is subject to the terms of the Mozilla Public
+// License, v2.0. If a copy of the MPL was not distributed with this
+// file, you can obtain one at https://mozilla.org/MPL/2.0/.
+//
+// Copyright (c) 2026 Jellyfin & Jellyfin Contributors
+//
+
 #if os(macOS)
 import VLCKit
 #elseif os(tvOS)
@@ -25,10 +33,10 @@ extension VLCVideoPlayer {
             super.init()
         }
 
-        // VLCMediaThumbnailerDelegate methods can be called from any thread.
-        // They need to be nonisolated and then dispatch to the main actor if they interact
-        // with @MainActor-isolated properties or methods.
-        public nonisolated func mediaThumbnailer(
+        /// VLCMediaThumbnailerDelegate methods can be called from any thread.
+        /// They need to be nonisolated and then dispatch to the main actor if they interact
+        /// with @MainActor-isolated properties or methods.
+        nonisolated func mediaThumbnailer(
             _ mediaThumbnailer: VLCMediaThumbnailer,
             didFinishThumbnail thumbnail: CGImage
         ) {
@@ -47,7 +55,7 @@ extension VLCVideoPlayer {
             }
         }
 
-        public nonisolated func mediaThumbnailerDidTimeOut(
+        nonisolated func mediaThumbnailerDidTimeOut(
             _ mediaThumbnailer: VLCMediaThumbnailer
         ) {
             Task { @MainActor in

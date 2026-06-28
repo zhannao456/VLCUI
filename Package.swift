@@ -15,13 +15,21 @@ let package = Package(
             name: "VLCUI",
             targets: ["VLCUI"]
         ),
+        .library(name: "MobileVLCKit", targets: ["MobileVLCKit"]),
+
     ],
     dependencies: [
     ],
     targets: [
         .target(
             name: "VLCUI",
-            dependencies: []
+            dependencies: [
+                .target(name: "MobileVLCKit", condition: .when(platforms: [.iOS])),
+            ]
+        ),
+        .binaryTarget(
+            name: "MobileVLCKit",
+            path: "Sources/MobileVLCKit.xcframework"
         ),
     ]
 )
